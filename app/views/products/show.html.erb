@@ -1,0 +1,56 @@
+<div class="container my-5">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-12">
+          <h1 class="text-center mb-5"><%= @product.name %></h1>
+        </div>
+        <div class="col-12">
+          <% if @product.images.attached? %>
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <% (0...@product.images.count).each do |image| %>
+                  <div class="carousel-item <%= "active" unless image!=0 %>">
+                    <%= image_tag @product.thumbnail(image, '650'), class: "p_img", style: "height: 400px", alt: image %>
+                  </div>
+                <% end %>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+          <% else %>
+            <div class="w-100 text-center">No image attached</div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+   <div class="row justify-content-center">
+    <div class="col-12">
+      <div class="p-4 product_detail bg-dark text-white rounded-3">
+        <h4 class="mb-4 fw-bold">Product Details:</h4>
+        <p class="px-4 mb-4"><%= @product.description %></p>
+        <h4 class="mb-4 fw-bold">Price: <span class="text-danger"><%= number_to_currency @product.price %></span></h4>
+        <h4 class="mb-4 fw-bold">
+          Stock:
+          <span class="text-<%= if @product.quantity < 10 then "danger" elsif @product.quantity > 10 then "success" end %>">
+            <%= @product.quantity > 0 ? @product.quantity : "Out of Stock" %>
+          </span>
+        </h4>
+        <div class="col-12">
+          <%= render "cart_items/form", cart_item: @cart_item if @product.quantity > 0 %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</div>

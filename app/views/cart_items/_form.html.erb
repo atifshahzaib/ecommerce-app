@@ -1,0 +1,18 @@
+<%= form_with model: cart_item, local: true do |form| %>
+  <div class="mb-3">
+    <%= form.hidden_field :product_id %>
+    <%= form.label :quantity, class: "form-label" %>
+    <%= form.number_field :quantity, min: 1, max: cart_item.product.quantity, class: "form-control", onFocusOut: "this.value < 1 ? this.value = 1 : null" %>
+    <div class="form-text">
+      <ul>
+        <% cart_item && cart_item.errors.full_messages_for(:quantity).each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <div>
+    <%= form.submit "Add to cart", class: "btn btn-dark px-4" %>
+  </div>
+<% end %>

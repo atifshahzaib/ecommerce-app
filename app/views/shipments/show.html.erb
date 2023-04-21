@@ -1,0 +1,14 @@
+<%= simple_form_for @shipment, html: { class: 'form-horizontal' } do |f| %>
+  <%= f.input :customer_name, label_html: { class: 'col-sm-2 control-label' }, input_html: { class: 'form-control', required: true, value: @shipment.user.full_name } %>
+  <%= f.input :shipping_address, label_html: { class: 'col-sm-2 control-label' }, input_html: { class: 'form-control' }, required: true %>
+  <%= f.input :phone_number, label_html: { class: 'col-sm-2 control-label' }, input_html: { class: 'form-control', required: true } %>
+  <%= f.input :payment_method, label_html: { class: 'col-sm-2 control-label' }, collection: Shipment.payment_methods.keys.map { |payment_method| [Shipment.human_attribute_name("payment_method.#{payment_method}"), payment_method] }, include_blank: false, input_html: { class: 'form-control', required: true } %>
+  <%= f.input :order_id, label_html: { class: 'col-sm-2 control-label' }, input_html: { class: 'form-control', required: true } %>
+  <%= f.hidden_field :user_id %>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.button :submit, class: 'btn btn-primary', value: 'Confirm Order' %>
+    </div>
+  </div>
+<% end %>
