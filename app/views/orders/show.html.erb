@@ -1,0 +1,36 @@
+<div class="container">
+  <h1>Order Details</h1>
+  <table class="table">
+    <tbody>
+      <tr>
+        <td><strong>ID:</strong></td>
+        <td><%= @order.id %></td>
+      </tr>
+      <tr>
+        <td><strong>Amount Paid:</strong></td>
+        <td><%= number_to_currency(@order.amount_paid) %></td>
+      </tr>
+      <tr>
+        <td><strong>User:</strong></td>
+        <td><%= @order.user.full_name %></td>
+      </tr>
+      <tr>
+        <td><strong>Shipping Address:</strong></td>
+        <td><%= @order.shipment.shipping_address %></td>
+      </tr>
+      <tr>
+        <td><strong>Phone Number:</strong></td>
+        <td><%= @order.shipment.phone_number %></td>
+      </tr>
+      <tr>
+        <td><strong>Payment Method:</strong></td>
+        <td><%= @order.shipment.payment_method %></td>
+      </tr>
+      <tr>
+        <td><strong>Status:</strong></td>
+        <td><%= @order.shipment.status %></td>
+      </tr>
+    </tbody>
+  </table>
+  <%= link_to "Back to Orders", orders_path, class: "btn btn-secondary" %>
+</div>

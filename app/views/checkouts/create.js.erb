@@ -1,0 +1,10 @@
+var stripe = Stripe("<%= Rails.application.credentials.stripe[:public] %>");
+
+stripe.redirectToCheckout({
+  sessionId: '<%= @session.id %>'
+}).then(function (result) {
+  <% flash[:notice] = "Your order has been successfully completed. Thank you for shopping here." %>
+}).catch(() => {
+  <% flash[:notice] = nil %>
+  <% flash[:alert] = "You have not proceeded your payment." %>
+});

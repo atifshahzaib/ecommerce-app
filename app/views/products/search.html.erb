@@ -1,0 +1,45 @@
+<h1 class="text-center mb-5">
+  Search Results
+</h1>
+
+<div class="row">
+  <% if @products.count > 0 %>
+    <% @products.each do |product| %>
+      <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="card w-100">
+          <div class="card-img-top">
+            <% if product.images.attached? %>
+              <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                  <% (0...product.images.count).each do |image| %>
+                    <div class="carousel-item <%= "active" unless image!=0 %>">
+                      <%= image_tag product.thumbnail(image, '400'), class: "p_img", alt: image %>
+                    </div>
+                  <% end %>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+            <% end %>
+          </div>
+
+          <div class="card-body">
+            <h5 class="card-title"><%= product.name %></h5>
+            <p class="card-text">Price: <%= number_to_currency(product.price) %></p>
+            <div class="d-flex px-5">
+              <%= link_to "View Detail", product_path(product), class: "btn btn-dark w-100" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <h4 class="text-center">Sorry, the product you are searching is not available at this time.</h4>
+  <% end %>
+</div>

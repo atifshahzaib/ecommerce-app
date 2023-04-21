@@ -1,0 +1,16 @@
+<div class="alerts mt-4">
+  <div class="container">
+    <% unless notice.nil? %>
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <%= notice %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <% end %>
+    <% unless alert.nil? %>
+      <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+        <%= alert %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <% end %>
+  </div>
+</div>

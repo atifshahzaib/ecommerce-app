@@ -1,0 +1,51 @@
+<h1 class="text-center mb-5">Cart Items</h1>
+
+<div class="row">
+  <% if @cart_items.count > 0 %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Product</th>
+          <th scope="col">Image</th>
+          <th scope="col">Price</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Sub Total</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% (0...@cart_items.count).each do |inc| %>
+          <tr>
+            <th scope="row"><%= inc + 1 %></th>
+            <td><%= @cart_items[inc].product.name %></td>
+            <td>
+              <% if @cart_items[inc].product.images.attached? %>
+                <%= image_tag @cart_items[inc].product.thumbnail(0, '200'), height: "80px", alt: @cart_items[inc].product.name %>
+              <% else %>
+                <%= "No image" %>
+              <% end %>
+            </td>
+            <td><%= number_to_currency @cart_items[inc].product.price %></td>
+            <td>
+              <div class="d-flex align-items-center" id=<%= "cart_item_" + @cart_items[inc].product_id.to_s %> >
+                <%= render 'cart_items/quantity', cart_item: @cart_items[inc] %>
+              </div>
+            </td>
+            <td id=<%= "cart_item_total_" + @cart_items[inc].product_id.to_s %> >
+              <%= number_to_currency(@cart_items[inc].product.price * @cart_items[inc].quantity) %>
+            </td>
+            <td>
+              <%= link_to("Remove", cart_item_path(@cart_items[inc].product.id), method: :delete, data: { confirm: "Are you sure to remove #{@cart_items[inc].product.name}?" }, class: "btn btn-danger") %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="w-100 d-flex justify-content-end mb-3">
+      <%= button_to "Checkout", checkouts_path, remote: true, class: "btn btn-primary" %>
+    </div>
+  <% else %>
+    <h4 class="text-center">No item in cart</h4>
+  <% end %>
+</div>
