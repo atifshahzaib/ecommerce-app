@@ -1,0 +1,11 @@
+development:
+  cloud_name: "devsinc-shoppy"
+  api_key: "993798928288292"
+  api_secret: "ldFGP03DSWSNDXWaMGNH_brkQY4"
+  secure: true
+
+production:
+  cloud_name: "devsinc-shoppy"
+  api_key: "993798928288292"
+  api_secret: "ldFGP03DSWSNDXWaMGNH_brkQY4"
+  secure: true
